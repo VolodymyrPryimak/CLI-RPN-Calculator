@@ -55,7 +55,7 @@ public class ShellRpnCalculator {
         return "Operation succeeded!";
     }
 
-    @ShellMethod("Reset")
+    @ShellMethod("Set limits of stack")
     public String setLimitOfStack(Integer limit) {
         log.info("Setting new stack limit... ");
         rpnCalculator.setNewLimitOfStackAndReset(limit);
