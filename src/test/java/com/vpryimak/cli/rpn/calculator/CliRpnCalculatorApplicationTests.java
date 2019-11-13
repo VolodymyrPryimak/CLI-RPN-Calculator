@@ -4,6 +4,7 @@ import com.vpryimak.cli.rpn.calculator.service.RpnCalculator;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class CliRpnCalculatorApplicationTests {
 
     @Autowired
     RpnCalculator rpnCalculator;
+
+    @Before
+    public void reset(){
+        shell.evaluate(() -> "reset");
+        rpnCalculator.reset();
+    }
 
     /**
      * > 5
@@ -194,5 +201,15 @@ public class CliRpnCalculatorApplicationTests {
                 shell.evaluate(() -> "calc null"));
         Assert.assertTrue(
                 shell.evaluate(() -> "calc ").toString().contains("Parameter '--in string' should be specified"));
+    }
+
+    @Test
+    public void stackLimitTest() {
+        for (int i = 0; i < 10; i++){
+            Assert.assertEquals(
+                    shell.evaluate(() -> "calc -3"), "-3.00");
+        }
+        Assert.assertTrue(
+                shell.evaluate(() -> "calc -3").toString().contains ("Stack of numbers is overloaded"));
     }
 }

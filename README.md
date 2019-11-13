@@ -31,3 +31,5 @@ $ java -jar target/${JarFileName}.jar
 | **calc**  | --in | String like "3 5 -". Supported operations: '+/*-' | RPN calculation. |
 | **reset** | -/- | -/- | Empty stack. |
 | **setLimitOfStack** | --limit  | Number | Set new size of stack. |
+
+FYI: The code actually can be improved thousand times depending on your needs and free time ;)

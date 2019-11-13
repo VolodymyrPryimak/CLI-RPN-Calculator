@@ -26,6 +26,11 @@ import org.springframework.stereotype.Component;
 public class RpnCalculatorImpl implements RpnCalculator {
 
     /**
+     * Error message when we reached limit.
+     */
+    private final String LIMIT_ERROR = "Stack of numbers is overloaded. Your stack size is: %s.";
+
+    /**
      * It was added to control capacity of stack
      */
     private Integer limitOfStack;
@@ -88,6 +93,7 @@ public class RpnCalculatorImpl implements RpnCalculator {
             default:
                 log.debug("Trying to parse and add number '{}' to stack.", in);
                 Double parseResult = Double.parseDouble(in);
+                checkStackSize(limitOfStack, String.format(LIMIT_ERROR, limitOfStack));
                 numbers.push(parseResult);
                 return parseResult;
         }
@@ -120,29 +126,30 @@ public class RpnCalculatorImpl implements RpnCalculator {
     }
 
     /**
-     * When we cannot perform operation we are trying to return last number.
-     */
-    private void operationSupportCheck() {
-        if (numbers.size() == 0) {
-            throw new RpnCalculatorException("There are no numbers in stack!");
-        }
-    }
-
-    /**
      * Performing calculation with operation.
      *
      * @param operation desired operation.
      * @return Result of calculation as Double.
      */
     private Double calc(BiFunction<Double, Double, Double> operation) {
-        operationSupportCheck();
+        checkStackSize(0, "There are no numbers in stack!");
         if (numbers.size() == 1) {
             return numbers.getFirst();
         }
-        if (numbers.size() == limitOfStack){
-            throw new RpnCalculatorException("Stack of numbers is overloaded.");
-        }
+        checkStackSize(limitOfStack, String.format(LIMIT_ERROR, limitOfStack));
         numbers.push(operation.apply(numbers.pop(), numbers.pop()));
         return numbers.getFirst();
+    }
+
+    /**
+     * Checking stack size in order to determine whether
+     * stack is empty or we are reached the limit.
+     * @param size Size that we are going to check.
+     * @param errorMessage Error message in case we have issue.
+     */
+    private void checkStackSize(Integer size, String errorMessage) {
+        if (numbers.size() == size) {
+            throw new RpnCalculatorException(errorMessage);
+        }
     }
 }
