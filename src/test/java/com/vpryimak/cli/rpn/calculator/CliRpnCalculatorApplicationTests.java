@@ -178,4 +178,21 @@ public class CliRpnCalculatorApplicationTests {
         Assert.assertEquals(shell.evaluate(() -> "calc -"), "8.00");
         Assert.assertEquals(shell.evaluate(() -> "calc /"), "0.62");
     }
+
+    @Test
+    public void fourthScenarioShellTestWithExtraSpacesAndComma() {
+        Assert.assertEquals(shell.evaluate(() -> "calc 5.0"), "5.00");
+        Assert.assertEquals(shell.evaluate(() -> "calc 9,00     "), "9.00");
+        Assert.assertEquals(shell.evaluate(() -> "calc     1 "), "1.00");
+        Assert.assertEquals(shell.evaluate(() -> "calc -    "), "8.00");
+        Assert.assertEquals(shell.evaluate(() -> "calc      /"), "0.62");
+    }
+
+    @Test
+    public void nullTest() {
+        Assert.assertEquals("0.00 (Cannot perform last operation because of: 'For input string: \"null\"')",
+                shell.evaluate(() -> "calc null"));
+        Assert.assertTrue(
+                shell.evaluate(() -> "calc ").toString().contains("Parameter '--in string' should be specified"));
+    }
 }

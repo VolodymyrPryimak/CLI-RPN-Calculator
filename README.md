@@ -4,10 +4,10 @@ Command-line reverse polish notation (RPN) calculator
 Running an App with Maven or an Executable Jar
 -----------------
 Prerequisites:
-- Use maven for building the jar.<br>
+- Use maven for building a jar.<br>
 - It requires JAVA 8 for running.
 - Edit default properties for your needs:
-```
+```yaml
 rpn:
   defaultStackSize: 10
      shell:

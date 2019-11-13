@@ -55,7 +55,7 @@ public class ShellRpnCalculator implements RpnOperationSupport<String> {
             log.error(e.getMessage());
             log.debug(e.getMessage(), e);
             return formatter.format(rpnCalculator.getLast())
-                    + " (Cannot perform last operation because of " + e.getMessage() + ")";
+                    + " (Cannot perform last operation because of: '" + e.getMessage() + "')";
         }
     }
 
@@ -96,7 +96,7 @@ public class ShellRpnCalculator implements RpnOperationSupport<String> {
 
     @Override
     public String calculate(String in) {
-        normaliseInput(in);
+        in = normaliseInput(in);
         return formatter.format(rpnCalculator.processElements(in));
     }
 }
