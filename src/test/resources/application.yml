@@ -1,0 +1,4 @@
+rpn:
+  defaultStackSize: 10
+  shell:
+    decimalFormat: "#0.00"

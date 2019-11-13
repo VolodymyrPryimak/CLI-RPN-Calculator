@@ -37,9 +37,9 @@ public class CliRpnCalculatorApplicationTests {
      */
     @Test
     public void firstScenarioTest() {
-        Assert.assertEquals(Double.valueOf(5), rpnCalculator.process("5"));
-        Assert.assertEquals(Double.valueOf(8), rpnCalculator.process("8"));
-        Assert.assertEquals(Double.valueOf(13), rpnCalculator.process("+"));
+        Assert.assertEquals(Double.valueOf(5), rpnCalculator.processElement("5"));
+        Assert.assertEquals(Double.valueOf(8), rpnCalculator.processElement("8"));
+        Assert.assertEquals(Double.valueOf(13), rpnCalculator.processElement("+"));
     }
 
     /**
@@ -50,8 +50,8 @@ public class CliRpnCalculatorApplicationTests {
      */
     @Test
     public void secondScenarioTest() {
-        Assert.assertEquals(Double.valueOf(13.0), rpnCalculator.process("5 8 +"));
-        Assert.assertEquals(Double.valueOf(0.0), rpnCalculator.process("13 -"));
+        Assert.assertEquals(Double.valueOf(13.0), rpnCalculator.processElements("5 8 +"));
+        Assert.assertEquals(Double.valueOf(0.0), rpnCalculator.processElements("13 -"));
     }
 
     /**
@@ -68,11 +68,11 @@ public class CliRpnCalculatorApplicationTests {
      */
     @Test
     public void thirdScenarioTest() {
-        Assert.assertEquals(Double.valueOf(-3.0), rpnCalculator.process("-3"));
-        Assert.assertEquals(Double.valueOf(-2.0), rpnCalculator.process("-2"));
-        Assert.assertEquals(Double.valueOf(6.0), rpnCalculator.process("*"));
-        Assert.assertEquals(Double.valueOf(5.0), rpnCalculator.process("5"));
-        Assert.assertEquals(Double.valueOf(11.0), rpnCalculator.process("+"));
+        Assert.assertEquals(Double.valueOf(-3.0), rpnCalculator.processElement("-3"));
+        Assert.assertEquals(Double.valueOf(-2.0), rpnCalculator.processElement("-2"));
+        Assert.assertEquals(Double.valueOf(6.0), rpnCalculator.processElement("*"));
+        Assert.assertEquals(Double.valueOf(5.0), rpnCalculator.processElement("5"));
+        Assert.assertEquals(Double.valueOf(11.0), rpnCalculator.processElement("+"));
     }
 
     /**
@@ -89,11 +89,11 @@ public class CliRpnCalculatorApplicationTests {
      */
     @Test
     public void fourthTestScenario() {
-        Assert.assertEquals(Double.valueOf(5), rpnCalculator.process("5"));
-        Assert.assertEquals(Double.valueOf(9), rpnCalculator.process("9"));
-        Assert.assertEquals(Double.valueOf(1), rpnCalculator.process("1"));
-        Assert.assertEquals(Double.valueOf(8), rpnCalculator.process("-"));
-        Assert.assertEquals(Double.valueOf(0.625), rpnCalculator.process("/"));
+        Assert.assertEquals(Double.valueOf(5), rpnCalculator.processElement("5"));
+        Assert.assertEquals(Double.valueOf(9), rpnCalculator.processElement("9"));
+        Assert.assertEquals(Double.valueOf(1), rpnCalculator.processElement("1"));
+        Assert.assertEquals(Double.valueOf(8), rpnCalculator.processElement("-"));
+        Assert.assertEquals(Double.valueOf(0.625), rpnCalculator.processElement("/"));
     }
 
     @Test
