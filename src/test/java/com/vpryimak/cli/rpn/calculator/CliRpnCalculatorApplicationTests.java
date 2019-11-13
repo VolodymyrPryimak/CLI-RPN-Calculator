@@ -212,4 +212,11 @@ public class CliRpnCalculatorApplicationTests {
         Assert.assertTrue(
                 shell.evaluate(() -> "calc -3").toString().contains ("Stack of numbers is overloaded"));
     }
+
+    @Test
+    public void extraBigNumbers() {
+        shell.evaluate(() -> "calc " + Double.MAX_VALUE);
+        shell.evaluate(() -> "calc " + Double.MAX_VALUE);
+        Assert.assertEquals(shell.evaluate(() -> "calc *"), "∞");
+    }
 }
